@@ -1,6 +1,8 @@
 module github.com/w40141/GoCISample
 
-go 1.21.4
+go 1.21
+
+toolchain go1.21.5
 
 require (
 	github.com/gin-gonic/gin v1.9.1

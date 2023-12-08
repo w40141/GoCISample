@@ -1,4 +1,4 @@
-name: Go vulnerability check
+name: Vulnerability
 permissions:
   contents: read
 on:

@@ -1,4 +1,4 @@
-name: Dockle and Trivy check
+name: Image check
 permissions:
   contents: read
 on:
