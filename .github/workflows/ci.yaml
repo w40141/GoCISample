@@ -20,10 +20,10 @@ on:
       - go.sum
     types:
       - labeled
-      - opened
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -34,6 +34,7 @@ jobs:
         run: go test ./... -v
   build:
     runs-on: ubuntu-latest
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -50,6 +51,7 @@ jobs:
         run: go build -o /dev/null ./...
   lint:
     runs-on: ubuntu-latest
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -62,6 +64,7 @@ jobs:
           version: latest
   format:
     runs-on: ubuntu-latest
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
     needs:
       - test
       - build
@@ -80,3 +83,26 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Apply Code formatter changes"
+  remove_label:
+    runs-on: ubuntu-latest
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    needs:
+      - format
+    steps:
+      - name: Remove label
+        run: echo "Remove label"
+        if: success() # Only remove the label if the previous steps were successful
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ env.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo, number } = context.issue;
+            const labelToRemove = 'CI';
+            await github.issues.removeLabel({
+              owner,
+              repo,
+              issue_number: number,
+              name: labelToRemove
+            });
