@@ -25,7 +25,7 @@ on:
     # JST 09:00
     - cron: '0 0 * * *'
 jobs:
-  govulncheck_job:
+  govulncheck:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
