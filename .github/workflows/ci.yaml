@@ -85,7 +85,7 @@ jobs:
           commit_message: "Apply Code formatter changes"
   remove_label:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI'))"
     needs:
       - format
     steps:

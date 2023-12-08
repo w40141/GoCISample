@@ -72,7 +72,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
   remove_label:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI'))"
     needs:
       - govulncheck
       - dockle_trivy_job
