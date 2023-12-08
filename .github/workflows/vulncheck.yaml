@@ -79,7 +79,7 @@ jobs:
           format: 'list'
           exit-code: '1'
           exit-level: 'warn'
-          ignore: 'VulncheckS-DI-0001,DKL-DI-0006'
+          ignore: 'CIS-DI-0001,DKL-DI-0006'
       - name: Run trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
