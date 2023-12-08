@@ -4,13 +4,13 @@ permissions:
 on:
   push:
     branches:
-      - $default-branch
+      - main
     paths:
       - .github/workflows/docker.yaml
       - Dockerfile
   pull_request:
     branches:
-      - $default-branch
+      - main
     paths:
       - .github/workflows/docker.yaml
       - Dockerfile

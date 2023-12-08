@@ -4,7 +4,7 @@ permissions:
 on:
   push:
     branches:
-      - $default-branch
+      - main
     paths:
       - .github/workflows/govuln.yaml
       - '**.go'
@@ -12,7 +12,7 @@ on:
       - go.sum
   pull_request:
     branches:
-      - $default-branch
+      - main
     paths:
       - .github/workflows/govuln.yaml
       - '**.go'
