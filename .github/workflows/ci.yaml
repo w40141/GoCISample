@@ -90,11 +90,10 @@ jobs:
       - format
     steps:
       - name: Remove label
-        run: echo "Remove label"
-        if: success() # Only remove the label if the previous steps were successful
+        uses: actions/github-script@v7
+        if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: actions/github-script@v7
         with:
           github-token: ${{ env.GITHUB_TOKEN }}
           script: |
