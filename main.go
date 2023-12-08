@@ -2,6 +2,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -29,18 +30,14 @@ func setupEchoRouter() *echo.Echo {
 }
 
 func main() {
-	ginRouter := setupGinRouter()
-	if err := ginRouter.Run(); err != nil {
-		panic(err)
-	}
+	// ginRouter := setupGinRouter()
+	// log.Fatal(ginRouter.Run(":8080"))
 
-	// http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-	// 	_, _ = w.Write([]byte("Hello World by Def!"))
-	// })
-	// log.Fatal(http.ListenAndServe(":8080", nil))
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = w.Write([]byte("Hello World by Def!"))
+	})
+	log.Fatal(http.ListenAndServe(":8080", nil))
 
 	// echoRouter := setupEchoRouter()
-	// if err := echoRouter.Start(":8080"); err != nil {
-	// 	panic(err)
-	// }
+	// log.Fatal(echoRouter.Start(":8080"))
 }
