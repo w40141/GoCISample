@@ -41,3 +41,11 @@ chkfmt:
 
 bin/main:
     env GO111MODULE=on GOOS=$(GOOS) $(GO_BUILD) $(GO_LDFLAGS) -o $@
+
+#   gopls
+#   gotests
+#   gomodifytags
+#   impl
+#   goplay
+#   dlv
+#   staticcheck

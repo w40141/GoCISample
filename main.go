@@ -30,13 +30,13 @@ func setupEchoRouter() *echo.Echo {
 }
 
 func main() {
-	// ginRouter := setupGinRouter()
-	// log.Fatal(ginRouter.Run(":8080"))
+	ginRouter := setupGinRouter()
+	log.Fatal(ginRouter.Run(":8080"))
 
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		_, _ = w.Write([]byte("Hello World by Def!"))
-	})
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+	// 	_, _ = w.Write([]byte("Hello World by Def!"))
+	// })
+	// log.Fatal(http.ListenAndServe(":8080", nil))
 
 	// echoRouter := setupEchoRouter()
 	// log.Fatal(echoRouter.Start(":8080"))
