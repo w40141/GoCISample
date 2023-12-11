@@ -1,0 +1,28 @@
+{
+    "name": "go-dev-container",
+    "dockerComposeFile": [
+        "../docker-compose.yaml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go",
+                "mosapride.zenkaku",
+                "MS-CEINTL.vscode-language-pack-ja",
+                "ms-vsliveshare.vsliveshare",
+                "oderwat.indent-rainbow",
+                "streetsidesoftware.code-spell-checker"
+            ],
+            "settings": {
+                "files.encoding": "utf8",
+                "files.eol": "\n"
+            }
+        }
+    },
+    "forwardPorts": [
+        8080
+    ],
+    "remoteUser": "vscode"
+}

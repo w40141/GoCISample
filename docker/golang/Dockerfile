@@ -1,7 +1,9 @@
 FROM golang:1.21.5-alpine
 
 RUN apk update \
-  && apk upgrade
+  && apk upgrade \
+  && apk add --no-cache \
+  git
 
 RUN go install github.com/cosmtrek/air@latest
 WORKDIR /app
