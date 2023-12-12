@@ -1,11 +1,12 @@
 FROM golang:1.21.5-alpine
 
-RUN apk update \
-  && apk upgrade \
-  && apk add --no-cache \
-  git
-
-RUN go install github.com/cosmtrek/air@latest
 WORKDIR /app
 
-CMD ["air", "-c", ".air.toml"]
+RUN apk update \
+  && apk add --no-cache \
+  git \
+  make \
+  && rm -rf /var/cache/apt/*
+
+
+CMD ["make", "hotload"]
