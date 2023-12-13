@@ -1,0 +1,26 @@
+{
+	"name": "go-dev-container",
+	"dockerComposeFile": [
+		"../docker-compose.yaml"
+	],
+	"service": "app",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"golang.go",
+				"MS-CEINTL.vscode-language-pack-ja",
+				"streetsidesoftware.code-spell-checker",
+				"ms-azuretools.vscode-docker",
+				"mhutchie.git-graph",
+				"GitHub.copilot-chat",
+				"GitHub.copilot",
+				"DavidAnson.vscode-markdownlint",
+				"mosapride.zenkaku",
+				"redhat.vscode-yaml",
+				"ms-vsliveshare.vsliveshare",
+				"ms-vscode.makefile-tools"
+			]
+		}
+	}
+}

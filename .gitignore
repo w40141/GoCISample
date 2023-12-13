@@ -21,4 +21,6 @@
 go.work
 
 tmp
+bin
 *.log
+cover.html
