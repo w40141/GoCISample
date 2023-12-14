@@ -10,3 +10,4 @@ setup: ## install tools for development
 	go install github.com/cosmtrek/air@latest
 	go install golang.org/x/tools/cmd/goimports@latest
 	go install github.com/zoncoen/scenarigo/cmd/scenarigo@latest
+	go install github.com/go-task/task/v3/cmd/task@latest
