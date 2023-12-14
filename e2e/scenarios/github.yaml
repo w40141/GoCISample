@@ -1,0 +1,11 @@
+title: get scenarigo repository
+steps:
+  - title: GET api
+    protocol: http
+    request:
+      method: GET
+      url: "{{env.ENDPOINT}}/{{env.USER}}/{{env.REPO}}"
+    expect:
+      code: OK
+      body:
+        name: "{{env.REPO}}"

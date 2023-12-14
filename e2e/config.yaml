@@ -1,0 +1,5 @@
+schemaVersion: config/v1
+vars:
+  endpoint: https://api.github.com/repos
+scenarios:
+  - scenarios/github.yaml

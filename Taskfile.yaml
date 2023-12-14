@@ -1,0 +1,133 @@
+version: '3'
+tasks:
+  build:
+    desc: Build the executable file
+    deps:
+      - download
+      - generate
+    cmds:
+      - go build -o bin/main main.go
+  download:
+    desc: Download dependencies
+    cmds:
+      - go mod tidy
+      - go mod download
+      - go mod verify
+  generate:
+    desc: Code generate
+    cmds:
+      - echo "Code generation"
+  ci:
+    desc: Run continuous integration commands
+    deps:
+      - fmt
+      - lint
+      - unit
+      - vuln
+  fmt:
+    desc: Format the packages
+    cmds:
+      - goimports -w .
+  install_fmt:
+    internal: true
+    cmds:
+      - go install golang.org/x/tools/cmd/goimports@latest
+    preconditions:
+      - "! type goimports"
+  lint:
+    desc: Lint the packages
+    deps:
+      - install_lint
+    cmds:
+      - golangci-lint run ./...
+  install_lint:
+    internal: true
+    cmds:
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    preconditions:
+      - "! type golangci-lint"
+  test:
+    desc: Run the unit tests
+    cmds:
+      - go test -v ./...
+  vuln:
+    desc: Check vulnerabilities
+    deps:
+      - install_vuln
+    cmds:
+      - govulncheck ./...
+  install_vuln:
+    internal: true
+    cmds:
+      - go install golang.org/x/vuln/cmd/govulncheck@latest
+    preconditions:
+      - "! type govulncheck"
+  all_test:
+    desc: Run the unit and e2e tests
+    deps:
+      - test
+      - e2e
+  e2e:
+    desc: Run the e2e tests
+    deps:
+      - install_e2e
+    cmds:
+      - scenarigo run --config ./e2e/config.yaml
+  install_e2e:
+    internal: true
+    cmds:
+      - go install github.com/zoncoen/scenarigo/cmd/scenarigo@latest
+    preconditions:
+      - "! type scenarigo"
+  down:
+    desc: Run docker compose down
+    cmds:
+      - docker compose down
+  dup:
+    desc: Run docker compose build and up
+    cmds:
+      - docker compose --build up
+  up:
+    desc: Run docker compose up
+    cmds:
+      - docker compose up
+  run:
+    desc: Run the main.go
+    deps:
+      - build
+    cmds:
+      - go run -v main.go
+  hotload:
+    desc: Hot reload
+    deps:
+      - install_hotreloader
+      - build
+    cmds:
+      - air -c .air.toml
+  install_hotreloader:
+    desc: Install hot reloader
+    internal: true
+    cmds:
+      - go install github.com/cosmtrek/air@latest
+    preconditions:
+      - "! type air"
+  update:
+    desc: Update dependencies
+    cmds:
+      - go get -u
+  clean:
+    desc: Remove output files and clean cache
+    cmds:
+      - rm -rf bin/main
+      - go clean
+  coverage:
+    desc: Test-coverage displays code coverage per package
+    deps:
+      - coverage_html
+    cmds:
+      - go tool cover -func cover.out
+  coverage_html:
+    desc: Generate HTML coverage report
+    cmds:
+      - go test -race -timeout 30m -cover ./... -coverprofile=cover.out
+      - go tool cover -html=cover.out -o cover.html
