@@ -86,7 +86,7 @@ tasks:
   dup:
     desc: Run docker compose build and up
     cmds:
-      - docker compose --build up
+      - docker compose up --build
   up:
     desc: Run docker compose up
     cmds:
