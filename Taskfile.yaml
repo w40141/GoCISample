@@ -32,8 +32,8 @@ tasks:
     internal: true
     cmds:
       - go install golang.org/x/tools/cmd/goimports@latest
-    preconditions:
-      - "! type goimports"
+    status:
+      - ( ! type goimports )
   lint:
     desc: Lint the packages
     deps:
@@ -44,8 +44,8 @@ tasks:
     internal: true
     cmds:
       - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-    preconditions:
-      - "! type golangci-lint"
+    status:
+      - ( ! type golangci-lint )
   test:
     desc: Run the unit tests
     cmds:
@@ -60,8 +60,8 @@ tasks:
     internal: true
     cmds:
       - go install golang.org/x/vuln/cmd/govulncheck@latest
-    preconditions:
-      - "! type govulncheck"
+    status:
+      - ( ! type govulncheck )
   all_test:
     desc: Run the unit and e2e tests
     deps:
@@ -77,28 +77,40 @@ tasks:
     internal: true
     cmds:
       - go install github.com/zoncoen/scenarigo/cmd/scenarigo@latest
-    preconditions:
-      - "! type scenarigo"
+    status:
+      - ( ! type scenarigo )
   down:
     desc: Run docker compose down
     cmds:
       - docker compose down
   dup:
     desc: Run docker compose build and up
+    dotenv:
+      - .env.local
     cmds:
       - docker compose up --build
+  dbuild:
+    desc: Run docker compose build
+    cmds:
+      - docker compose build
   up:
     desc: Run docker compose up
+    dotenv:
+      - .env.local
     cmds:
       - docker compose up
   run:
     desc: Run the main.go
+    dotenv:
+      - .env.local
     deps:
       - build
     cmds:
       - go run -v main.go
   hotload:
     desc: Hot reload
+    dotenv:
+      - .env.local
     deps:
       - install_hotreloader
       - build
@@ -109,8 +121,8 @@ tasks:
     internal: true
     cmds:
       - go install github.com/cosmtrek/air@latest
-    preconditions:
-      - "! type air"
+    status:
+      - ( ! type air )
   update:
     desc: Update dependencies
     cmds:
@@ -128,6 +140,7 @@ tasks:
       - go tool cover -func cover.out
   coverage_html:
     desc: Generate HTML coverage report
+    internal: true
     cmds:
       - go test -race -timeout 30m -cover ./... -coverprofile=cover.out
       - go tool cover -html=cover.out -o cover.html

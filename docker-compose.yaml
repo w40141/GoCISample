@@ -6,34 +6,32 @@ services:
       - ./docker/db/data:/docker-entrypoint-initdb.d
       - ./docker/db/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql_data:/var/lib/mysql
-    env_file:
-      - .env.local
     ports:
-      - 13306:3306
+      - ${MYSQL_EXPOSE_PORT}:3306
     restart: always
   phpmyadmin:
     image: phpmyadmin:latest
     restart: always
-    env_file:
-      - .env.local
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "8081:80"
+      - ${PMA_EXPOSE_PORT}:80
     depends_on:
       - db
   app:
     build:
       context: .
       dockerfile: ./docker/golang/Dockerfile
-    env_file:
-      - .env.local
     volumes:
       - .:/app:cached
+      - golang:/go
     ports:
-      - 8080:8080
+      - ${APP_EXPOSE_PORT}:${APP_PORT}
     depends_on:
       - db
 volumes:
   mysql_data:
+  golang:
