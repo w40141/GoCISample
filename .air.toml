@@ -5,10 +5,26 @@ tmp_dir = "bin"
 [build]
 args_bin = []
 bin = "./bin/main"
-cmd = "make build"
+cmd = "task build"
 delay = 1000
-exclude_dir = ["assets", "tmp", "vendor", "testdata", "docker", "cloudbuild"]
-exclude_file = ["docker-compose.yaml"]
+exclude_dir = [
+  "assets",
+  "tmp",
+  "vendor",
+  "testdata",
+  "docker",
+  "cloudbuild",
+  "e2e",
+]
+exclude_file = [
+  "docker-compose.yaml",
+  "Taskfile.yaml",
+  "Makefile",
+  "editorconfig",
+  "Dockerfile",
+  "LICENSE",
+  "README.md",
+]
 exclude_regex = ["_test.go"]
 exclude_unchanged = false
 follow_symlink = false

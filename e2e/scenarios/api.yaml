@@ -4,8 +4,7 @@ steps:
     protocol: http
     request:
       method: GET
-      url: "{{env.ENDPOINT}}/{{env.USER}}/{{env.REPO}}"
+      url: "{{env.ENDPOINT}}"
     expect:
       code: OK
-      body:
-        name: "{{env.REPO}}"
+      body: Hello World

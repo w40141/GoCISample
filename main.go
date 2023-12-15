@@ -14,7 +14,7 @@ import (
 func setupGinRouter() *gin.Engine {
 	router := gin.Default()
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World by Gin!")
+		c.String(http.StatusOK, "Hello World by gin!")
 	})
 
 	return router
@@ -23,7 +23,7 @@ func setupGinRouter() *gin.Engine {
 func setupEchoRouter() *echo.Echo {
 	router := echo.New()
 	router.GET("/", func(c echo.Context) error {
-		a := c.String(http.StatusOK, "Hello World by Echo!")
+		a := c.String(http.StatusOK, "Hello World by echo!")
 
 		return a
 	})
@@ -38,22 +38,22 @@ func main() {
 	}
 	port = fmt.Sprintf(":%s", port)
 
-	engeine, ok := os.LookupEnv("APP_ENGINE")
-	if !ok {
-		engeine = "def"
-	}
-
-	switch engeine {
-	case "gin":
-		ginRouter := setupGinRouter()
-		log.Fatal(ginRouter.Run(port))
-	case "echo":
-		echoRouter := setupEchoRouter()
-		log.Fatal(echoRouter.Start(port))
-	default:
-		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-			_, _ = w.Write([]byte("Hello World by Def!"))
-		})
-		log.Fatal(http.ListenAndServe(port, nil))
-	}
+	// engeine, ok := os.LookupEnv("APP_ENGINE")
+	// if !ok {
+	// 	engeine = "def"
+	// }
+	//
+	// switch engeine {
+	// case "gin":
+	// 	ginRouter := setupGinRouter()
+	// 	log.Fatal(ginRouter.Run(port))
+	// case "echo":
+	// 	echoRouter := setupEchoRouter()
+	// 	log.Fatal(echoRouter.Start(port))
+	// default:
+	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = w.Write([]byte("Hello World"))
+	})
+	log.Fatal(http.ListenAndServe(port, nil))
+	// }
 }
