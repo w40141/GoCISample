@@ -38,19 +38,6 @@ func main() {
 	}
 	port = fmt.Sprintf(":%s", port)
 
-	// engeine, ok := os.LookupEnv("APP_ENGINE")
-	// if !ok {
-	// 	engeine = "def"
-	// }
-	//
-	// switch engeine {
-	// case "gin":
-	// 	ginRouter := setupGinRouter()
-	// 	log.Fatal(ginRouter.Run(port))
-	// case "echo":
-	// 	echoRouter := setupEchoRouter()
-	// 	log.Fatal(echoRouter.Start(port))
-	// default:
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = w.Write([]byte("Hello World"))
 	})
