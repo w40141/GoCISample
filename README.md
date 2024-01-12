@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml)
 [![Vulnerability](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml)
-![GitHub License](https://img.shields.io/github/license/w40141/pmtool)
+![GitHub License](https://img.shields.io/github/license/w40141/GoCISample)
 
 GoCISample is a template.
 
@@ -59,4 +59,4 @@ GoCISample is a template.
 
 ## License
 
-[MIT](https://github.com/w40141/pmtool/blob/master/LICENSE)
+[MIT](https://github.com/w40141/GoCISample/blob/master/LICENSE)
