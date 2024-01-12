@@ -21,6 +21,8 @@ services:
       - ${PMA_EXPOSE_PORT}:80
     depends_on:
       - db
+    profiles:
+      - debug
   app:
     build:
       context: .

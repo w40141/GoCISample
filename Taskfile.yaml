@@ -26,9 +26,11 @@ tasks:
       - vuln
   fmt:
     desc: Format the packages
+    deps:
+      - install_fmt
     cmds:
       - goimports -w .
-  install_fmt:
+  install-fmt:
     internal: true
     cmds:
       - go install golang.org/x/tools/cmd/goimports@latest
@@ -40,34 +42,34 @@ tasks:
       - install_lint
     cmds:
       - golangci-lint run ./...
-  install_lint:
+  install-lint:
     internal: true
     cmds:
       - go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
     status:
       - ( ! type golangci-lint )
-  test:
-    desc: Run the unit tests
-    cmds:
-      - go test -v ./...
   vuln:
     desc: Check vulnerabilities
     deps:
       - install_vuln
     cmds:
       - govulncheck ./...
-  install_vuln:
+  install-vuln:
     internal: true
     cmds:
       - go install golang.org/x/vuln/cmd/govulncheck@latest
     status:
       - ( ! type govulncheck )
-  all_test:
+  test:
+    desc: Run the unit tests
+    cmds:
+      - go test -v ./...
+  test-all:
     desc: Run the unit and e2e tests
     deps:
       - test
-      - e2e
-  e2e:
+      - test:e2e
+  test-e2e:
     desc: Run the e2e tests
     dotenv:
       - .env.local
@@ -78,48 +80,56 @@ tasks:
       - until curl http://localhost:8080 -o /dev/null; do sleep 1; done
       - scenarigo run --config ./e2e/config.yaml
       - docker compose stop
-  install_e2e:
+  install-e2e:
     internal: true
     cmds:
       - go install github.com/zoncoen/scenarigo/cmd/scenarigo@latest
     status:
       - ( ! type scenarigo )
-  down:
-    desc: Run docker compose down
-    cmds:
-      - docker compose down
-  buildup:
-    desc: Run docker compose build and up
-    dotenv:
-      - .env.local
-    cmds:
-      - docker compose up --build
-  docker:build:
-    desc: Run docker compose build
-    cmds:
-      - docker compose build
-  up:
+  docker-up:
     desc: Run docker compose up
     dotenv:
       - .env.local
     cmds:
       - docker compose up
+  docker-down:
+    desc: Run docker compose down
+    cmds:
+      - docker compose down
+  docker-buildup:
+    desc: Run docker compose build and up
+    dotenv:
+      - .env.local
+    cmds:
+      - docker compose up --build
+  docker-build:
+    desc: Run docker compose build
+    dotenv:
+      - .env.local
+    cmds:
+      - docker compose build
+  docker-debug:
+    desc: Run docker include sql client
+    dotenv:
+      - .env.local
+    cmds:
+      - docker compose --profile debug up
   run:
     desc: Run the main.go
     dotenv:
       - .env.local
     cmds:
       - go run -v main.go
-  hotload:
+  run-hotload:
     desc: Hot reload
     dotenv:
       - .env.local
     deps:
-      - install_hotreloader
+      - install_hotloader
       - build
     cmds:
       - air -c .air.toml
-  install_hotreloader:
+  install-hotloader:
     desc: Install hot reloader
     internal: true
     cmds:
