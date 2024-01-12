@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml)
 [![Vulnerability](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml)
-![GitHub License](https://img.shields.io/github/license/w40141/GoCISample)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/w40141/GoCISample/blob/main/LICENSE)
 
 GoCISample is a template.
 
