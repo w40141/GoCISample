@@ -8,7 +8,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -buildvcs=false -trimpath -ldflags '-w -s' -o /go/bin/myapp .
 RUN [ -e /usr/bin/upx ] && upx server || echo
 
-FROM alpine:3.19.0
+FROM alpine:3.19.1
 COPY --from=builder /go/bin/myapp /go/bin/myapp
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f http://localhost/ || exit 1
