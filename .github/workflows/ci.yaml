@@ -23,7 +23,8 @@ on:
 jobs:
   remove_label:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI'))"
+    timeout-minutes: 10
+    if: ${{(github.event.action == 'labeled') && (github.event.label.name == 'CI')}}
     permissions:
       issues: write
       pull-requests: write
@@ -42,7 +43,8 @@ jobs:
             await github.rest.issues.removeLabel(params)
   test:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    timeout-minutes: 10
+    if: ${{((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || (github.event_name == 'push')}}
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -53,7 +55,8 @@ jobs:
         run: go test ./... -v
   build:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    timeout-minutes: 10
+    if: ${{((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || (github.event_name == 'push')}}
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -70,7 +73,8 @@ jobs:
         run: go build -o /dev/null ./...
   lint:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    timeout-minutes: 10
+    if: ${{((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || (github.event_name == 'push')}}
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -83,7 +87,9 @@ jobs:
           version: latest
   format:
     runs-on: ubuntu-latest
-    if: "((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || ((github.event_name == 'push'))"
+    timeout-minutes: 10
+
+    if: ${{((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || (github.event_name == 'push')}}
     needs:
       - test
       - build
@@ -94,9 +100,15 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version-file: "go.mod"
+      - name: Install gofumpt
+        run: go install mvdan.cc/gofumpt@latest
+      - name: Install golines
+        run: go install github.com/segmentio/golines@latest
+      - name: Format by golines
+        run: golines --base-formatter=gofumpt -w ./
       - name: Install goimports
         run: go install golang.org/x/tools/cmd/goimports@latest
-      - name: Format code
+      - name: Format by goimports
         run: goimports -w .
       - name: Auto commit
         uses: stefanzweifel/git-auto-commit-action@v5
