@@ -1,10 +1,10 @@
 # GoCISample
 
-[![CI](https://github.com/w40141/todo-go/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/w40141/todo-go/actions/workflows/ci.yaml)
-[![Vulnerability](https://github.com/w40141/todo-go/actions/workflows/vulncheck.yaml/badge.svg?branch=main)](https://github.com/w40141/todo-go/actions/workflows/vulncheck.yaml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/w40141/todo-go/blob/main/LICENSE)
+[![CI](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/ci.yaml)
+[![Vulnerability](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml/badge.svg?branch=main)](https://github.com/w40141/GoCISample/actions/workflows/vulncheck.yaml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/w40141/GoCISample/blob/main/LICENSE)
 
-todo-go is a sample ToDo app.
+GoCISample is a tmplate for golang app.
 
 ## Development
 
@@ -59,4 +59,4 @@ todo-go is a sample ToDo app.
 
 ## License
 
-[MIT](https://github.com/w40141/todo-go/blob/master/LICENSE)
+[MIT](https://github.com/w40141/GoCISample/blob/master/LICENSE)
