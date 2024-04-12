@@ -14,7 +14,7 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/build.yaml
+      - .github/workflows/ci.yaml
       - '**.go'
       - go.mod
       - go.sum
