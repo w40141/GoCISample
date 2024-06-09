@@ -1,5 +1,7 @@
+START TRANSACTION;
+
 INSERT INTO
-  `user` (`id`, `name`)
+  `users` (`id`, `name`)
 VALUES
   ('01HFNQAVW53ZR0C4GB0AQ832RX', 'taro'),
   ('01HFNW78WWR1C765WGNHFC6N2G', 'jiro'),
@@ -7,7 +9,7 @@ VALUES
   ('01HFTJ3B5AXGZA2QYG07KQ6538', 'hanako');
 
 INSERT INTO
-  `todo` (`id`, `title`, `user_id`)
+  `todos` (`id`, `title`, `user_id`)
 VALUES
   (
     '01HG7BG5681V3K3K611PJYN48M',
@@ -49,3 +51,5 @@ VALUES
     '買い物へ行く',
     '01HFNW78WWR1C765WGNHFC6N2G'
   );
+
+COMMIT;
