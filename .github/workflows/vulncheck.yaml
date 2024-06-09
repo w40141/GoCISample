@@ -30,6 +30,7 @@ on:
 jobs:
   remove_label:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: "((github.event.action == 'labeled') && (github.event.label.name == 'Vulncheck'))"
     permissions:
       issues: write
@@ -49,6 +50,7 @@ jobs:
             await github.rest.issues.removeLabel(params)
   govulncheck:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: "((github.event.action == 'labeled') && (github.event.label.name == 'Vulncheck')) || (github.event_name == 'push') || (github.event_name == 'schedule')"
     steps:
       - name: Checkout code
@@ -66,6 +68,7 @@ jobs:
         shell: bash
   dockle_trivy_job:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: "((github.event.action == 'labeled') && (github.event.label.name == 'Vulncheck')) || (github.event_name == 'push') || (github.event_name == 'schedule')"
     steps:
       - name: Checkout code

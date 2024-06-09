@@ -88,7 +88,6 @@ jobs:
   format:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     if: ${{((github.event.action == 'labeled') && (github.event.label.name == 'CI')) || (github.event_name == 'push')}}
     needs:
       - test
